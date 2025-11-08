@@ -63,5 +63,12 @@ public class InventoryService {
 
         return dto;
     }
+    public InventoryDTO getInventoryDetails(Long productId) {
+        Inventory inventory = inventoryRepo.findByProductId(productId);
+        if (inventory == null) {
+            throw new RuntimeException("Inventory not found for product ID: " + productId);
+        }
+        return new InventoryDTO(inventory.getProductId(), inventory.getQuantity());
+    }
 
 }

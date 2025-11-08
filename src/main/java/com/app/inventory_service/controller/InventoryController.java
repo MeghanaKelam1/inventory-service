@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("inventory")
+//@RequestMapping("/api")
 public class InventoryController {
     private final InventoryService inventoryService;
 
@@ -48,7 +48,6 @@ public class InventoryController {
         return ResponseEntity.ok(count);
     }
 
-
     //To get the delivery details
     @GetMapping("availability/{productId}/{requestedQuantity}")
     public ResponseEntity<AvailabilityDTO> getAvailability(
@@ -64,5 +63,11 @@ public class InventoryController {
 
         return ResponseEntity.ok(dto);
     }
+    @GetMapping("/details/{productId}")
+    public ResponseEntity<InventoryDTO> getInventoryDetails(@PathVariable Long productId) {
+        InventoryDTO dto = inventoryService.getInventoryDetails(productId);
+        return ResponseEntity.ok(dto);
+    }
+
 }
 
